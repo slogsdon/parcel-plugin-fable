@@ -6,7 +6,7 @@ const localRequire = require('parcel-bundler/src/utils/localRequire');
 
 class FableAsset extends JSAsset {
   async parse(code) {
-    await localRequire('babel-core');
+    await localRequire('babel-core', this.name);
     const fable = await localRequire('fable-splitter', this.name);
 
     // TODO: read from config file and overwrite with the below
