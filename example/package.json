@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "yarn dotnet:run-script js:build",
+    "clean": "rm -rf .cache dist src/bin src/obj",
+    "dotnet:run-script": "cd src && dotnet fable yarn-run",
+    "js:build": "parcel build src/index.html",
+    "js:start": "parcel src/index.html",
+    "postinstall": "dotnet restore",
+    "start": "yarn dotnet:run-script js:start"
+  },
+  "devDependencies": {
+    "fable-splitter": "^0.1.20",
+    "parcel-bundler": "^1.4.1",
+    "parcel-plugin-fable": "file:.."
+  }
+}

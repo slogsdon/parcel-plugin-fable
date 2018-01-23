@@ -1,0 +1,18 @@
+{
+  "name": "parcel-plugin-fable",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "description": "Parcel asset type plugin for Fable",
+  "author": {
+    "name": "Shane Logsdon",
+    "email": "shane@shanelogsdon.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slogsdon/parcel-plugin-fable.git"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.4.1"
+  }
+}
