@@ -31,8 +31,15 @@ class FableAsset extends Asset {
       outDir: path.dirname(this.name),
     };
 
+    const info = await fableSplitter(options);
+
+    // add compiled paths as dependencies for watch functionality
+    // to trigger rebuild on F# file changes
+    Array
+      .from(info.compiledPaths)
+      .map(p => this.addDependency(p, {includedInParent: true}));
+
     // TODO: possible without temp file?
-    const output = await fableSplitter(options);
     const outputFile = this.name.replace(/\.(fsproj|fsx)$/, '.js');
     const outputContent = await fs.readFile(outputFile);
     this.contents = outputContent.toString();
