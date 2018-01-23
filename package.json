@@ -13,6 +13,6 @@
     "url": "https://github.com/slogsdon/parcel-plugin-fable.git"
   },
   "dependencies": {
-    "parcel-bundler": "^1.4.1"
+    "parcel-bundler": "^1.5.0"
   }
 }
