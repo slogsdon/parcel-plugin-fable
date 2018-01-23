@@ -24,12 +24,16 @@ class FableAsset extends Asset {
 
   async parse(code) {
     const fableSplitter = await this.loadDeps();
-
-    // TODO: read from config file and overwrite with the below
-    const options = {
+    let options = {
       entry: this.name,
       outDir: path.dirname(this.name),
     };
+
+    // read project config and use that as the base
+    const config = await this.getConfig(['fable-splitter.config.js']);
+    if (config) {
+      options = Object.assign(config, options);
+    }
 
     const info = await fableSplitter(options);
 
