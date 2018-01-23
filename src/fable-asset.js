@@ -1,15 +1,15 @@
-const commandExists = require('command-exists');
+const commandExists = require("command-exists");
 const fableUtils = require("fable-utils");
-const path = require('path');
-const {Asset} = require('parcel-bundler');
+const path = require("path");
+const { Asset } = require("parcel-bundler");
 // TODO: see if there is a way to clean up these requires
-const fs = require('parcel-bundler/src/utils/fs');
-const localRequire = require('parcel-bundler/src/utils/localRequire');
+const fs = require("parcel-bundler/src/utils/fs");
+const localRequire = require("parcel-bundler/src/utils/localRequire");
 
 class FableAsset extends Asset {
   constructor(name, pkg, options) {
     super(name, pkg, options);
-    this.type = 'js';
+    this.type = "js";
   }
 
   process() {
@@ -31,13 +31,13 @@ class FableAsset extends Asset {
       babel: fableUtils.resolveBabelOptions({
         plugins: [
           // default Babel plugins
-          'babel-plugin-transform-es2015-modules-commonjs',
-        ],
-      }),
+          "babel-plugin-transform-es2015-modules-commonjs"
+        ]
+      })
     };
 
     // read project config and use that as the base
-    const config = await this.getConfig(['fable-splitter.config.js']);
+    const config = await this.getConfig(["fable-splitter.config.js"]);
     if (config) {
       options = Object.assign(config, options);
     }
@@ -46,12 +46,12 @@ class FableAsset extends Asset {
 
     // add compiled paths as dependencies for watch functionality
     // to trigger rebuild on F# file changes
-    Array
-      .from(info.compiledPaths)
-      .map(p => this.addDependency(p, {includedInParent: true}));
+    Array.from(info.compiledPaths).map(p =>
+      this.addDependency(p, { includedInParent: true })
+    );
 
     // TODO: possible without temp file?
-    const outputFile = this.name.replace(/\.(fsproj|fsx)$/, '.js');
+    const outputFile = this.name.replace(/\.(fsproj|fsx)$/, ".js");
     const outputContent = await fs.readFile(outputFile);
     this.contents = outputContent.toString();
 
@@ -62,15 +62,15 @@ class FableAsset extends Asset {
   async loadDeps() {
     // dotnet SDK tooling is required by Fable to operate successfully
     try {
-      await commandExists('dotnet');
+      await commandExists("dotnet");
     } catch (e) {
       throw new Error(
         "dotnet isn't installed. Visit https://dot.net for more info"
       );
     }
 
-    await localRequire('babel-core', this.name);
-    const fable = await localRequire('fable-splitter', this.name);
+    await localRequire("babel-core", this.name);
+    const fable = await localRequire("fable-splitter", this.name);
     return fable.default;
   }
 }
