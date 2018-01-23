@@ -1,4 +1,5 @@
 const commandExists = require('command-exists');
+const fableUtils = require("fable-utils");
 const path = require('path');
 const {Asset} = require('parcel-bundler');
 // TODO: see if there is a way to clean up these requires
@@ -27,6 +28,12 @@ class FableAsset extends Asset {
     let options = {
       entry: this.name,
       outDir: path.dirname(this.name),
+      babel: fableUtils.resolveBabelOptions({
+        plugins: [
+          // default Babel plugins
+          'babel-plugin-transform-es2015-modules-commonjs',
+        ],
+      }),
     };
 
     // read project config and use that as the base
