@@ -2044,7 +2044,7 @@ pako@~1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
 
-parcel-bundler@^1.4.1, parcel-bundler@^1.5.0:
+parcel-bundler@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/parcel-bundler/-/parcel-bundler-1.5.0.tgz#b02ba5a263c5f6edfb0079a59fe4b7c91bfe2554"
   dependencies:
@@ -2087,11 +2087,12 @@ parcel-bundler@^1.4.1, parcel-bundler@^1.5.0:
     worker-farm "^1.4.1"
     ws "^3.3.3"
 
-parcel-plugin-fable@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.0.1.tgz#1385a9f169c1c0e172e13ec874a3f3c0a35324ff"
+parcel-plugin-fable@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.1.0.tgz#9c674c445a5aac721517fcc99bd6f639ad399875"
   dependencies:
-    parcel-bundler "^1.4.1"
+    fable-utils "^1.0.6"
+    parcel-bundler "^1.5.0"
 
 parse-asn1@^5.0.0:
   version "5.1.0"
