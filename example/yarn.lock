@@ -510,8 +510,8 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000793"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000793.tgz#3c00c66e423a7a1907c7dd96769a78b2afa8a72e"
+  version "1.0.30000794"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000794.tgz#bbe71104fa277ce4b362387d54905e8b88e52f35"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1072,8 +1072,8 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
 fable-splitter@^0.1.20:
-  version "0.1.20"
-  resolved "https://registry.yarnpkg.com/fable-splitter/-/fable-splitter-0.1.20.tgz#213af3f0fc69e0c2265e5d98e391ba0aa284c9a6"
+  version "0.1.21"
+  resolved "https://registry.yarnpkg.com/fable-splitter/-/fable-splitter-0.1.21.tgz#6b1c6f47c03ca54c22adb19179b4d9268bc67d91"
   dependencies:
     chokidar "^1.7.0"
     fable-utils "^1.0.6"
@@ -1601,8 +1601,8 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
 js-base64@^2.1.9:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.1.tgz#e02813181cd53002888e918935467acb2910e596"
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.2.tgz#1896da010ef8862f385d8887648e9b6dc4a7a2e9"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
@@ -2074,9 +2074,9 @@ parcel-bundler@^1.4.1:
     worker-farm "^1.4.1"
     ws "^3.3.3"
 
-parcel-plugin-fable@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.0.0.tgz#8e97738f63b9e85d21d60a952e002153144455d9"
+parcel-plugin-fable@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.0.1.tgz#1385a9f169c1c0e172e13ec874a3f3c0a35324ff"
   dependencies:
     parcel-bundler "^1.4.1"
 
