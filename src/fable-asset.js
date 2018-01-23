@@ -1,3 +1,4 @@
+const commandExists = require('command-exists');
 const path = require('path');
 const {Asset} = require('parcel-bundler');
 // TODO: see if there is a way to clean up these requires
@@ -49,6 +50,14 @@ class FableAsset extends Asset {
   }
 
   async loadDeps() {
+    // dotnet SDK tooling is required by Fable to operate successfully
+    try {
+      await commandExists('dotnet');
+    } catch (e) {
+      throw new Error(
+        "dotnet isn't installed. Visit https://dot.net for more info"
+      );
+    }
 
     await localRequire('babel-core', this.name);
     const fable = await localRequire('fable-splitter', this.name);
