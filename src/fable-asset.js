@@ -22,15 +22,6 @@ class FableAsset extends Asset {
     return super.process();
   }
 
-  async generate() {
-    // TODO: is reading the file here required?
-    const outputFile = this.name.replace(/\.(fsproj|fsx)$/, '.js');
-    const outputContent = await fs.readFile(outputFile);
-    return {
-      js: outputContent.toString(),
-    };
-  }
-
   async parse(code) {
     const fableSplitter = await this.loadDeps();
 
@@ -46,7 +37,8 @@ class FableAsset extends Asset {
     const outputContent = await fs.readFile(outputFile);
     this.contents = outputContent.toString();
 
-    return await super.parse(this.contents);
+    // `this.contents` becomes the new value for `this.ast`
+    return this.contents;
   }
 
   async loadDeps() {
