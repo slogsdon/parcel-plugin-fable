@@ -1,6 +1,5 @@
 // @ts-check
 
-const commandExists = require("command-exists");
 const fableUtils = require("fable-utils");
 const path = require("path");
 const { Asset } = require("parcel-bundler");
@@ -53,18 +52,20 @@ class FableAsset extends Asset {
       throw new Error(error || "Compilation error. See log above");
     }
 
-    const babelOpts = {
-      plugins: [
-        // "babel-plugin-transform-es2015-modules-commonjs"
-        fableUtils.babelPlugins.getRemoveUnneededNulls(),
-        fableUtils.babelPlugins.getTransformMacroExpressions(babel.template)
-      ],
+    const babelOpts = fableUtils.resolveBabelOptions({
+      // TODO: Does Parcel require commonjs modules?
+      plugins: [ "babel-plugin-transform-es2015-modules-commonjs" ]
       // sourceMaps: true,
       // sourceFileName: path.relative(
       //   process.cwd(),
       //   data.fileName.replace(/\\/g, '/')
       // )
-    };
+    });
+    babelOpts.plugins = babelOpts.plugins.concat([
+      fableUtils.babelPlugins.getRemoveUnneededNulls(),
+      fableUtils.babelPlugins.getTransformMacroExpressions(babel.template)
+    ]);
+
     const transformed = babel.transformFromAst(data, code, babelOpts);
     console.log("fable: Compiled " + path.relative(process.cwd(), msg.path));
     this.contents = transformed.code;
@@ -102,14 +103,18 @@ class FableAsset extends Asset {
   // helpers
 
   async requireDependencies() {
+    // TODO: I'm getting an error saying command-exists cannot be found,
+    // comment out this part for now
+
     // dotnet SDK tooling is required by Fable to operate successfully
-    try {
-      await commandExists("dotnet");
-    } catch (e) {
-      throw new Error(
-        "dotnet isn't installed. Visit https://dot.net for more info"
-      );
-    }
+    // try {
+    //   const commandExists = await localRequire("command-exists");
+    //   await commandExists("dotnet");
+    // } catch (e) {
+    //   throw new Error(
+    //     "dotnet isn't installed. Visit https://dot.net for more info"
+    //   );
+    // }
 
     const babel = await localRequire("babel-core", this.name);
     return babel;
