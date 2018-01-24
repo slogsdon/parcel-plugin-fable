@@ -17,5 +17,8 @@
   },
   "peerDependencies": {
     "parcel-bundler": "~1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^9.3.0"
   }
 }

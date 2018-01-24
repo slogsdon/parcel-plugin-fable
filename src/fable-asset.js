@@ -1,3 +1,5 @@
+// @ts-check
+
 const commandExists = require("command-exists");
 const fableUtils = require("fable-utils");
 const path = require("path");
@@ -5,8 +7,9 @@ const { Asset } = require("parcel-bundler");
 
 // TODO: see if there is a way to clean up these requires
 const uglify = require("parcel-bundler/src/transforms/uglify");
-const fs = require("parcel-bundler/src/utils/fs");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
+
+const ensureArray = obj => (Array.isArray(obj) ? obj : obj != null ? [obj] : []);
 
 class FableAsset extends Asset {
   constructor(name, pkg, options) {
@@ -27,42 +30,49 @@ class FableAsset extends Asset {
   }
 
   async parse(code) {
-    const fableSplitter = await this.requireDependencies();
-    let options = {
-      entry: this.name,
-      outDir: path.dirname(this.name),
-      babel: fableUtils.resolveBabelOptions({
-        plugins: [
-          // default Babel plugins
-          "babel-plugin-transform-es2015-modules-commonjs"
-        ]
-      })
+    const babel = await this.requireDependencies();
+    const isProduction = process.env.NODE_ENV === "production";
+    const port =
+      process.env.FABLE_SERVER_PORT != null
+      ? parseInt(process.env.FABLE_SERVER_PORT, 10)
+      : 61225;
+
+    let msg = {
+      path: this.name,
+      define: isProduction ? [] : ["DEBUG"]
     };
 
-    // read project config, and use that as the base
-    const config = await this.getConfig(["fable-splitter.config.js"]);
-    if (config) {
-      options = Object.assign(config, options);
+    const response = await fableUtils.client.send(port, JSON.stringify(msg))
+    const data = JSON.parse(response);
+
+    // ERROR MANAGEMENT
+    const { error = null, logs = {} } = data;
+    for (const x of ensureArray(logs.warning)) { console.warn(x); }
+    for (const x of ensureArray(logs.error)) { console.error(x); }
+    if (error || ensureArray(logs.error).length > 0) {
+      throw new Error(error || "Compilation error. See log above");
     }
 
-    const info = await fableSplitter(options);
-
-    // fable-splitter will bubble up errors, but it will also still
-    // display them. No need to display the errors via Parcel, so a
-    // simple message should do.
-    if (Array.isArray(info.logs.error) && info.logs.error.length > 0) {
-      throw new Error("Compilation error. See log above");
-    }
+    const babelOpts = {
+      plugins: [
+        // "babel-plugin-transform-es2015-modules-commonjs"
+        fableUtils.babelPlugins.getRemoveUnneededNulls(),
+        fableUtils.babelPlugins.getTransformMacroExpressions(babel.template)
+      ],
+      // sourceMaps: true,
+      // sourceFileName: path.relative(
+      //   process.cwd(),
+      //   data.fileName.replace(/\\/g, '/')
+      // )
+    };
+    const transformed = babel.transformFromAst(data, code, babelOpts);
+    console.log("fable: Compiled " + path.relative(process.cwd(), msg.path));
+    this.contents = transformed.code;
 
     // add compiled paths as dependencies for watch functionality
     // to trigger rebuild on F# file changes
-    Array.from(info.compiledPaths).map(p =>
-      this.addDependency(p, { includedInParent: true })
-    );
+    this.addDependency(this.name, { includedInParent: true });
 
-    await this.populateContents();
-
-    // `this.contents` becomes the new value for `this.ast`
     return this.contents;
   }
 
@@ -101,21 +111,10 @@ class FableAsset extends Asset {
       );
     }
 
-    await localRequire("babel-core", this.name);
-    const fable = await localRequire("fable-splitter", this.name);
-    return fable.default;
+    const babel = await localRequire("babel-core", this.name);
+    return babel;
   }
 
-  async populateContents() {
-    // TODO: possible without temp file?
-    try {
-      const outputFile = this.name.replace(/\.(fsproj|fsx)$/, ".js");
-      const outputContent = await fs.readFile(outputFile);
-      this.contents = outputContent.toString();
-    } catch (e) {
-      throw new Error("Intermediate build file missing");
-    }
-  }
 }
 
 module.exports = FableAsset;
