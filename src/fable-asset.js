@@ -1,7 +1,6 @@
 // @ts-check
 
-
-const walk = require('babylon-walk');
+const walk = require("babylon-walk");
 const fableUtils = require("fable-utils");
 const path = require("path");
 const { Asset } = require("parcel-bundler");
@@ -9,9 +8,10 @@ const { Asset } = require("parcel-bundler");
 // TODO: see if there is a way to clean up these requires
 const uglify = require("parcel-bundler/src/transforms/uglify");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
-const collectDependencies = require('parcel-bundler/src/visitors/dependencies');
+const collectDependencies = require("parcel-bundler/src/visitors/dependencies");
 
-const ensureArray = obj => (Array.isArray(obj) ? obj : obj != null ? [obj] : []);
+const ensureArray = obj =>
+  Array.isArray(obj) ? obj : obj != null ? [obj] : [];
 
 class FableAsset extends Asset {
   constructor(name, pkg, options) {
@@ -36,32 +36,36 @@ class FableAsset extends Asset {
     const isProduction = process.env.NODE_ENV === "production";
     const port =
       process.env.FABLE_SERVER_PORT != null
-      ? parseInt(process.env.FABLE_SERVER_PORT, 10)
-      : 61225;
+        ? parseInt(process.env.FABLE_SERVER_PORT, 10)
+        : 61225;
 
     let msg = {
       path: this.name,
       define: isProduction ? [] : ["DEBUG"]
     };
 
-    const response = await fableUtils.client.send(port, JSON.stringify(msg))
+    const response = await fableUtils.client.send(port, JSON.stringify(msg));
     const data = JSON.parse(response);
 
     // ERROR MANAGEMENT
     const { error = null, logs = {} } = data;
-    for (const x of ensureArray(logs.warning)) { console.warn(x); }
-    for (const x of ensureArray(logs.error)) { console.error(x); }
+    for (const x of ensureArray(logs.warning)) {
+      console.warn(x);
+    }
+    for (const x of ensureArray(logs.error)) {
+      console.error(x);
+    }
     if (error || ensureArray(logs.error).length > 0) {
       throw new Error(error || "Compilation error. See log above");
     }
 
     const babelOpts = fableUtils.resolveBabelOptions({
       // TODO: Does Parcel require commonjs modules?
-      plugins: [ "babel-plugin-transform-es2015-modules-commonjs" ],
+      plugins: ["babel-plugin-transform-es2015-modules-commonjs"],
       sourceMaps: true,
       sourceFileName: path.relative(
         process.cwd(),
-        data.fileName.replace(/\\/g, '/')
+        data.fileName.replace(/\\/g, "/")
       )
     });
     babelOpts.plugins = babelOpts.plugins.concat([
