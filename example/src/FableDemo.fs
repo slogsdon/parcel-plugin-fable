@@ -5,7 +5,7 @@ open Fable.Core.JsInterop
 open Fable.Import
 
 let init() =
-    Greeting.hello "Shane" |> printfn "%s"
+    Greeting.hello "World" |> printfn "%s"
 
     let canvas = Browser.document.getElementsByTagName_canvas().[0]
     canvas.width <- 1000.
