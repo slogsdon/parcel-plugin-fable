@@ -2,7 +2,9 @@ const commandExists = require("command-exists");
 const fableUtils = require("fable-utils");
 const path = require("path");
 const { Asset } = require("parcel-bundler");
+
 // TODO: see if there is a way to clean up these requires
+const uglify = require("parcel-bundler/src/transforms/uglify");
 const fs = require("parcel-bundler/src/utils/fs");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
 
@@ -10,6 +12,7 @@ class FableAsset extends Asset {
   constructor(name, pkg, options) {
     super(name, pkg, options);
     this.type = "js";
+    this.outputCode = null;
   }
 
   process() {
@@ -57,6 +60,18 @@ class FableAsset extends Asset {
 
     // `this.contents` becomes the new value for `this.ast`
     return this.contents;
+  }
+
+  async transform() {
+    if (this.options.minify) {
+      await uglify(this);
+    }
+  }
+
+  async generate() {
+    return {
+      [this.type]: this.outputCode || this.contents
+    };
   }
 
   async loadDeps() {
