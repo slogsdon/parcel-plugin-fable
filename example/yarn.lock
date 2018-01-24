@@ -2087,9 +2087,9 @@ parcel-bundler@^1.5.0:
     worker-farm "^1.4.1"
     ws "^3.3.3"
 
-parcel-plugin-fable@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.1.0.tgz#9c674c445a5aac721517fcc99bd6f639ad399875"
+parcel-plugin-fable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.2.0.tgz#3da821e0178f07786a7c595fcc00436eada6b0ba"
   dependencies:
     fable-utils "^1.0.6"
     parcel-bundler "^1.5.0"
