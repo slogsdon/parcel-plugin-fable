@@ -1,5 +1,7 @@
 // @ts-check
 
+
+const walk = require('babylon-walk');
 const fableUtils = require("fable-utils");
 const path = require("path");
 const { Asset } = require("parcel-bundler");
@@ -7,6 +9,7 @@ const { Asset } = require("parcel-bundler");
 // TODO: see if there is a way to clean up these requires
 const uglify = require("parcel-bundler/src/transforms/uglify");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
+const collectDependencies = require('parcel-bundler/src/visitors/dependencies');
 
 const ensureArray = obj => (Array.isArray(obj) ? obj : obj != null ? [obj] : []);
 
@@ -69,12 +72,15 @@ class FableAsset extends Asset {
     const transformed = babel.transformFromAst(data, code, babelOpts);
     console.log("fable: Compiled " + path.relative(process.cwd(), msg.path));
     this.contents = transformed.code;
+    return data;
+  }
 
-    // add compiled paths as dependencies for watch functionality
-    // to trigger rebuild on F# file changes
-    this.addDependency(this.name, { includedInParent: true });
+  traverseFast(visitor) {
+    return walk.simple(this.ast, visitor, this);
+  }
 
-    return this.contents;
+  collectDependencies() {
+    this.traverseFast(collectDependencies);
   }
 
   // final transformations before bundle is generated
@@ -103,23 +109,8 @@ class FableAsset extends Asset {
   // helpers
 
   async requireDependencies() {
-    // TODO: I'm getting an error saying command-exists cannot be found,
-    // comment out this part for now
-
-    // dotnet SDK tooling is required by Fable to operate successfully
-    // try {
-    //   const commandExists = await localRequire("command-exists");
-    //   await commandExists("dotnet");
-    // } catch (e) {
-    //   throw new Error(
-    //     "dotnet isn't installed. Visit https://dot.net for more info"
-    //   );
-    // }
-
-    const babel = await localRequire("babel-core", this.name);
-    return babel;
+    return await localRequire("babel-core", this.name);
   }
-
 }
 
 module.exports = FableAsset;

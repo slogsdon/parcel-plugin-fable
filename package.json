@@ -13,6 +13,7 @@
     "url": "https://github.com/slogsdon/parcel-plugin-fable.git"
   },
   "dependencies": {
+    "babylon-walk": "^1.0.2",
     "fable-utils": "^1.0.6"
   },
   "peerDependencies": {
