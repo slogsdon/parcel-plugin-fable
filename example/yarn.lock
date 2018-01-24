@@ -186,7 +186,7 @@ babel-core@^6.25.0, babel-core@^6.26.0:
     slash "^1.0.0"
     source-map "^0.5.6"
 
-babel-generator@^6.25.0, babel-generator@^6.26.0, babel-generator@^6.8.0:
+babel-generator@^6.25.0, babel-generator@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.0.tgz#ac1ae20070b79f6e3ca1d3269613053774f20dc5"
   dependencies:
@@ -198,14 +198,6 @@ babel-generator@^6.25.0, babel-generator@^6.26.0, babel-generator@^6.8.0:
     lodash "^4.17.4"
     source-map "^0.5.6"
     trim-right "^1.0.1"
-
-babel-helper-builder-react-jsx@^6.24.1:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-helper-builder-react-jsx/-/babel-helper-builder-react-jsx-6.26.0.tgz#39ff8313b75c8b65dceff1f31d383e0ff2a408a0"
-  dependencies:
-    babel-runtime "^6.26.0"
-    babel-types "^6.26.0"
-    esutils "^2.0.2"
 
 babel-helpers@^6.24.1:
   version "6.24.1"
@@ -220,10 +212,6 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-syntax-jsx@^6.8.0:
-  version "6.18.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-syntax-jsx/-/babel-plugin-syntax-jsx-6.18.0.tgz#0af32a9a6e13ca7a3fd5069e62d7b0f58d0d8946"
-
 babel-plugin-transform-es2015-modules-commonjs@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-modules-commonjs/-/babel-plugin-transform-es2015-modules-commonjs-6.26.0.tgz#0d8394029b7dc6abe1a97ef181e00758dd2e5d8a"
@@ -232,14 +220,6 @@ babel-plugin-transform-es2015-modules-commonjs@^6.26.0:
     babel-runtime "^6.26.0"
     babel-template "^6.26.0"
     babel-types "^6.26.0"
-
-babel-plugin-transform-react-jsx@^6.24.1:
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-jsx/-/babel-plugin-transform-react-jsx-6.24.1.tgz#840a028e7df460dfc3a2d29f0c0d91f6376e66a3"
-  dependencies:
-    babel-helper-builder-react-jsx "^6.24.1"
-    babel-plugin-syntax-jsx "^6.8.0"
-    babel-runtime "^6.22.0"
 
 babel-plugin-transform-strict-mode@^6.24.1:
   version "6.24.1"
@@ -267,7 +247,7 @@ babel-runtime@^6.11.6, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-template@^6.24.1, babel-template@^6.26.0, babel-template@^6.9.0:
+babel-template@^6.24.1, babel-template@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
   dependencies:
@@ -277,7 +257,7 @@ babel-template@^6.24.1, babel-template@^6.26.0, babel-template@^6.9.0:
     babylon "^6.18.0"
     lodash "^4.17.4"
 
-babel-traverse@^6.26.0, babel-traverse@^6.9.0:
+babel-traverse@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.26.0.tgz#46a9cbd7edcc62c8e5c064e2d2d8d0f4035766ee"
   dependencies:
@@ -291,7 +271,7 @@ babel-traverse@^6.26.0, babel-traverse@^6.9.0:
     invariant "^2.2.2"
     lodash "^4.17.4"
 
-babel-types@^6.15.0, babel-types@^6.24.1, babel-types@^6.26.0, babel-types@^6.9.0:
+babel-types@^6.15.0, babel-types@^6.24.1, babel-types@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.26.0.tgz#a3b073f94ab49eb6fa55cd65227a334380632497"
   dependencies:
@@ -319,10 +299,6 @@ balanced-match@^0.4.2:
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
-
-base62@^1.1.2:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/base62/-/base62-1.2.1.tgz#95a5a22350b0a557f3f081247fc2c398803ecb0c"
 
 base64-js@^1.0.2:
   version "1.2.1"
@@ -815,12 +791,6 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-dbly-linked-list@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/dbly-linked-list/-/dbly-linked-list-0.2.0.tgz#d30f5225dc1ce72220d7931489b0c5703b1aa8aa"
-  dependencies:
-    lodash.isequal "^4.5.0"
-
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1078,15 +1048,6 @@ extsprintf@1.3.0:
 extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
-
-fable-splitter@^0.1.20:
-  version "0.1.21"
-  resolved "https://registry.yarnpkg.com/fable-splitter/-/fable-splitter-0.1.21.tgz#6b1c6f47c03ca54c22adb19179b4d9268bc67d91"
-  dependencies:
-    chokidar "^1.7.0"
-    fable-utils "^1.0.6"
-  optionalDependencies:
-    prepack "^0.2.5"
 
 fable-utils@^1.0.6:
   version "1.0.6"
@@ -1703,10 +1664,6 @@ lodash.clone@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
 
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -2087,10 +2044,10 @@ parcel-bundler@^1.5.0:
     worker-farm "^1.4.1"
     ws "^3.3.3"
 
-parcel-plugin-fable@^1.3.0:
+"parcel-plugin-fable@file:..":
   version "1.3.0"
-  resolved "https://registry.yarnpkg.com/parcel-plugin-fable/-/parcel-plugin-fable-1.3.0.tgz#ec5e490c83f66a416babab08d3d0a175a00cef98"
   dependencies:
+    babylon-walk "^1.0.2"
     fable-utils "^1.0.6"
 
 parse-asn1@^5.0.0:
@@ -2405,24 +2362,6 @@ posthtml@^0.8.7:
     posthtml-parser "^0.1.3"
     posthtml-render "^1.0.5"
 
-prepack@^0.2.5:
-  version "0.2.19"
-  resolved "https://registry.yarnpkg.com/prepack/-/prepack-0.2.19.tgz#967d3835cc208a6576a068c71304a29bf391b2c4"
-  dependencies:
-    babel-core "^6.26.0"
-    babel-generator "^6.8.0"
-    babel-plugin-transform-react-jsx "^6.24.1"
-    babel-template "^6.9.0"
-    babel-traverse "^6.9.0"
-    babel-types "^6.9.0"
-    babylon "^6.18.0"
-    base62 "^1.1.2"
-    queue-fifo "^0.2.3"
-    seedrandom "^2.4.2"
-    source-map "^0.5.6"
-    vscode-debugadapter "^1.24.0"
-    vscode-debugprotocol "^1.24.0"
-
 prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
@@ -2491,12 +2430,6 @@ querystring-es3@^0.2.0:
 querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
-
-queue-fifo@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/queue-fifo/-/queue-fifo-0.2.4.tgz#8276bf59122abcae9ac5a3234f534e696699bf25"
-  dependencies:
-    dbly-linked-list "0.2.0"
 
 randomatic@^1.1.3:
   version "1.1.7"
@@ -2673,10 +2606,6 @@ sanitize-filename@^1.6.1:
 sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
-
-seedrandom@^2.4.2:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-2.4.3.tgz#2438504dad33917314bff18ac4d794f16d6aaecc"
 
 semver@^5.3.0:
   version "5.5.0"
@@ -2985,8 +2914,8 @@ tar@^2.2.1:
     inherits "2"
 
 timers-browserify@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.4.tgz#96ca53f4b794a5e7c0e1bd7cc88a372298fa01e6"
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.5.tgz#04878fb12a155a159c9d1e59faa1f77bf4ecc44c"
   dependencies:
     setimmediate "^1.0.4"
 
@@ -3153,8 +3082,8 @@ uuid@^3.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
 v8-compile-cache@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-1.1.0.tgz#1dc2a340fb8e5f800a32bcdbfb8c23cd747021b9"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-1.1.2.tgz#8d32e4f16974654657e676e0e467a348e89b0dc4"
 
 vendors@^1.0.0:
   version "1.0.1"
@@ -3173,16 +3102,6 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
-
-vscode-debugadapter@^1.24.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/vscode-debugadapter/-/vscode-debugadapter-1.25.0.tgz#8b39ab4e0f7432a94ef51e3ec67c0c3e9fc98ab8"
-  dependencies:
-    vscode-debugprotocol "1.25.0"
-
-vscode-debugprotocol@1.25.0, vscode-debugprotocol@^1.24.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/vscode-debugprotocol/-/vscode-debugprotocol-1.25.0.tgz#7a7e38df4cad8839e37ebcd06ed903902d97a7e3"
 
 whet.extend@~0.9.9:
   version "0.9.9"
