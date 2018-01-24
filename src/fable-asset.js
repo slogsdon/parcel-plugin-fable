@@ -57,12 +57,12 @@ class FableAsset extends Asset {
 
     const babelOpts = fableUtils.resolveBabelOptions({
       // TODO: Does Parcel require commonjs modules?
-      plugins: [ "babel-plugin-transform-es2015-modules-commonjs" ]
-      // sourceMaps: true,
-      // sourceFileName: path.relative(
-      //   process.cwd(),
-      //   data.fileName.replace(/\\/g, '/')
-      // )
+      plugins: [ "babel-plugin-transform-es2015-modules-commonjs" ],
+      sourceMaps: true,
+      sourceFileName: path.relative(
+        process.cwd(),
+        data.fileName.replace(/\\/g, '/')
+      )
     });
     babelOpts.plugins = babelOpts.plugins.concat([
       fableUtils.babelPlugins.getRemoveUnneededNulls(),
@@ -72,6 +72,7 @@ class FableAsset extends Asset {
     const transformed = babel.transformFromAst(data, code, babelOpts);
     console.log("fable: Compiled " + path.relative(process.cwd(), msg.path));
     this.contents = transformed.code;
+    this.sourceMap = transformed.map;
     return data;
   }
 
@@ -92,7 +93,8 @@ class FableAsset extends Asset {
 
   async generate() {
     return {
-      [this.type]: this.outputCode || this.contents
+      [this.type]: this.outputCode || this.contents,
+      map: this.sourceMap
     };
   }
 
