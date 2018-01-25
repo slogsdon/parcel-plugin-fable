@@ -11,6 +11,6 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.5.0",
-    "parcel-plugin-fable": "^1.4.0"
+    "parcel-plugin-fable": "^1.5.0"
   }
 }
