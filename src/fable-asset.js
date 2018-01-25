@@ -6,6 +6,7 @@ const path = require("path");
 const { Asset } = require("parcel-bundler");
 
 // TODO: see if there is a way to clean up these requires
+const Logger = require("parcel-bundler/src/Logger");
 const uglify = require("parcel-bundler/src/transforms/uglify");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
 const collectDependencies = require("parcel-bundler/src/visitors/dependencies");
@@ -18,6 +19,7 @@ class FableAsset extends Asset {
     super(name, pkg, options);
     this.type = "js";
     this.outputCode = null;
+    this.logger = new Logger(options);
   }
 
   process() {
@@ -50,10 +52,10 @@ class FableAsset extends Asset {
     // ERROR MANAGEMENT
     const { error = null, logs = {} } = data;
     for (const x of ensureArray(logs.warning)) {
-      console.warn(x);
+      this.logger.warn(this.formatFableMessage(x));
     }
     for (const x of ensureArray(logs.error)) {
-      console.error(x);
+      this.logger.error(this.formatFableMessage(x) + "\r\n");
     }
     if (error || ensureArray(logs.error).length > 0) {
       throw new Error(error || "Compilation error. See log above");
@@ -74,7 +76,6 @@ class FableAsset extends Asset {
     ]);
 
     const transformed = babel.transformFromAst(data, code, babelOpts);
-    console.log("fable: Compiled " + path.relative(process.cwd(), msg.path));
     this.contents = transformed.code;
     this.sourceMap = transformed.map;
     return data;
@@ -104,15 +105,23 @@ class FableAsset extends Asset {
 
   generateErrorMessage(error) {
     return (
-      path.relative(process.cwd(), this.options.rootDir) +
-      path.sep +
-      this.relativeName +
+      this.projectRelativeName() +
       ": " +
       error.message
     );
   }
 
   // helpers
+
+  formatFableMessage(x) {
+    return x.replace(this.name, this.projectRelativeName());
+  }
+
+  projectRelativeName() {
+    return path.relative(process.cwd(), this.options.rootDir) +
+    path.sep +
+    this.relativeName;
+  }
 
   async requireDependencies() {
     return await localRequire("babel-core", this.name);
