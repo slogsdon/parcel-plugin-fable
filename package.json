@@ -1,6 +1,6 @@
 {
   "name": "parcel-plugin-fable",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "src/index.js",
   "license": "MIT",
   "description": "Parcel asset type plugin for Fable",
