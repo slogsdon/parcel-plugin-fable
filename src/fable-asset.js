@@ -104,11 +104,7 @@ class FableAsset extends Asset {
   }
 
   generateErrorMessage(error) {
-    return (
-      this.projectRelativeName() +
-      ": " +
-      error.message
-    );
+    return this.projectRelativeName() + ": " + error.message;
   }
 
   // helpers
@@ -118,9 +114,11 @@ class FableAsset extends Asset {
   }
 
   projectRelativeName() {
-    return path.relative(process.cwd(), this.options.rootDir) +
-    path.sep +
-    this.relativeName;
+    return (
+      path.relative(process.cwd(), this.options.rootDir) +
+      path.sep +
+      this.relativeName
+    );
   }
 
   async requireDependencies() {
