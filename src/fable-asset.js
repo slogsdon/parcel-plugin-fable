@@ -122,7 +122,7 @@ class FableAsset extends Asset {
   }
 
   async requireDependencies() {
-    return await localRequire("babel-core", this.name);
+    return await localRequire("babel-core", this.options.rootDir);
   }
 }
 
