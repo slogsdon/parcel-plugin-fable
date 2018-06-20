@@ -116,7 +116,7 @@ class FableAsset extends Asset {
   }
 
   generateErrorMessage(error) {
-    return this.projectRelativeName() + ": " + error.message + "\n";
+    return this.projectRelativeName() + ": " + error.message + "\r\n";
   }
 
   // helpers
