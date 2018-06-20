@@ -65,13 +65,13 @@ class FableAsset extends Asset {
       throw new Error(error || "Compilation error. See log above");
     }
 
-    // if (data.sourceFiles) {
-    //   data.sourceFiles.map(f => {
-    //     this.addDependency(
-    //       "./" + path.relative(path.dirname(data.fileName), f.replace(/\\/g, "/"))
-    //     );
-    //   });
-    // }
+    if (data.sourceFiles) {
+      data.sourceFiles.map(f => {
+        this.addDependency(
+          "./" + path.relative(path.dirname(data.fileName), f.replace(/\\/g, "/"))
+        );
+      });
+    }
 
     const babelOpts = fableUtils.resolveBabelOptions({
       // TODO: Does Parcel require commonjs modules?
