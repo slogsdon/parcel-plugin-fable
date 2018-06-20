@@ -7,7 +7,7 @@ const { Asset } = require("parcel-bundler");
 
 // TODO: see if there is a way to clean up these requires
 const Logger = require("parcel-bundler/src/Logger");
-const uglify = require("parcel-bundler/src/transforms/uglify");
+const uglify = require("parcel-bundler/src/transforms/terser");
 const localRequire = require("parcel-bundler/src/utils/localRequire");
 const collectDependencies = require("parcel-bundler/src/visitors/dependencies");
 
@@ -19,7 +19,11 @@ class FableAsset extends Asset {
     super(name, pkg, options);
     this.type = "js";
     this.outputCode = null;
-    this.logger = new Logger(options);
+    try {
+      this.logger = new Logger(options);
+    } catch (e) {
+      this.logger = Logger;
+    }
   }
 
   process() {
@@ -61,6 +65,14 @@ class FableAsset extends Asset {
       throw new Error(error || "Compilation error. See log above");
     }
 
+    // if (data.sourceFiles) {
+    //   data.sourceFiles.map(f => {
+    //     this.addDependency(
+    //       "./" + path.relative(path.dirname(data.fileName), f.replace(/\\/g, "/"))
+    //     );
+    //   });
+    // }
+
     const babelOpts = fableUtils.resolveBabelOptions({
       // TODO: Does Parcel require commonjs modules?
       plugins: ["babel-plugin-transform-es2015-modules-commonjs"],
@@ -86,7 +98,7 @@ class FableAsset extends Asset {
   }
 
   collectDependencies() {
-    this.traverseFast(collectDependencies);
+    walk.ancestor(this.ast, collectDependencies, this);
   }
 
   // final transformations before bundle is generated
@@ -104,7 +116,7 @@ class FableAsset extends Asset {
   }
 
   generateErrorMessage(error) {
-    return this.projectRelativeName() + ": " + error.message;
+    return this.projectRelativeName() + ": " + error.message + "\n";
   }
 
   // helpers
@@ -114,9 +126,8 @@ class FableAsset extends Asset {
   }
 
   projectRelativeName() {
-    return (
-      path.relative(process.cwd(), this.options.rootDir) +
-      path.sep +
+    return path.join(
+      path.relative(process.cwd(), this.options.rootDir),
       this.relativeName
     );
   }
