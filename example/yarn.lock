@@ -2414,8 +2414,8 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 
 qs@~6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.3.tgz#759dc9cf20d8bde3b09e868f43bf14bdfb8467b1"
 
 query-string@^4.1.0:
   version "4.3.4"
